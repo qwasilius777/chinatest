@@ -1,0 +1,1749 @@
+<!DOCTYPE html>
+<html lang="ru-BY">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChinaDrop — Нашёл. Выкупили. Доставили. | Выкуп товаров из Китая в Беларусь</title>
+  <meta name="description" content="Индивидуальный выкуп одежды, обуви и аксессуаров с Poizon, Pinduoduo, Taobao и 1688 с доставкой по Беларуси. Прозрачный предварительный расчёт и отслеживание в личном кабинете.">
+  <style>
+    :root {
+      --acid-lime: #C8FF3D;
+      --acid-lime-hover: #b8f028;
+      --graphite: #171717;
+      --graphite-light: #2A2A2A;
+      --milk: #F8F8F5;
+      --white: #FFFFFF;
+      --soft-grey: #EAEAE4;
+      --border: #E4E4DC;
+      --muted: #6B6B64;
+      --danger: #D92D20;
+      --danger-bg: #FEF3F2;
+      --warning: #B54708;
+      --warning-bg: #FFFAEB;
+      --success: #067647;
+      --success-bg: #ECFDF3;
+      --radius-sm: 10px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --font-heading: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --shadow-sm: 0 2px 8px rgba(23, 23, 23, 0.04);
+      --max-w: 1200px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--milk);
+      color: var(--graphite);
+      font-family: var(--font-body);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, select, textarea {
+      font: inherit;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--graphite);
+      outline-offset: 2px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    @media (min-width: 768px) {
+      .container { padding: 0 24px; }
+    }
+
+    /* Demo Top Bar */
+    .demo-banner {
+      background: var(--graphite);
+      color: var(--white);
+      font-size: 13px;
+      padding: 8px 16px;
+      text-align: center;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .demo-badge {
+      background: var(--acid-lime);
+      color: var(--graphite);
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .view-switcher {
+      display: inline-flex;
+      background: var(--graphite-light);
+      padding: 3px;
+      border-radius: 8px;
+      gap: 4px;
+    }
+    .view-switcher button {
+      color: #CCC;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      transition: 0.15s;
+    }
+    .view-switcher button.active {
+      background: var(--acid-lime);
+      color: var(--graphite);
+    }
+
+    /* Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(248, 248, 245, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      gap: 16px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: -0.03em;
+    }
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--graphite);
+      color: var(--acid-lime);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 15px;
+      letter-spacing: -0.04em;
+    }
+    .desktop-nav {
+      display: none;
+      align-items: center;
+      gap: 24px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .desktop-nav a:hover {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .mobile-menu-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--white);
+    }
+    @media (min-width: 960px) {
+      .desktop-nav { display: flex; }
+      .mobile-menu-btn { display: none; }
+    }
+
+    .mobile-nav {
+      display: none;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 16px;
+    }
+    .mobile-nav.open {
+      display: block;
+    }
+    .mobile-nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-weight: 600;
+      font-size: 16px;
+    }
+    .mobile-nav-links a {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--soft-grey);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 14px;
+      transition: background-color 0.15s, transform 0.1s;
+      text-align: center;
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn-lime {
+      background: var(--acid-lime);
+      color: var(--graphite);
+      border: 1px solid #b5eb2b;
+    }
+    .btn-lime:hover { background: var(--acid-lime-hover); }
+    .btn-dark {
+      background: var(--graphite);
+      color: var(--white);
+    }
+    .btn-dark:hover { background: var(--graphite-light); }
+    .btn-outline {
+      background: var(--white);
+      color: var(--graphite);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { background: var(--soft-grey); }
+    .btn-sm {
+      min-height: 36px;
+      padding: 6px 12px;
+      font-size: 13px;
+    }
+
+    /* Sections & Typography */
+    section {
+      padding: 48px 0;
+    }
+    @media (min-width: 768px) {
+      section { padding: 72px 0; }
+    }
+    .section-header {
+      margin-bottom: 32px;
+      max-width: 680px;
+    }
+    .eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: var(--soft-grey);
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+    }
+    h1 {
+      font-size: clamp(32px, 5vw, 54px);
+      font-weight: 800;
+    }
+    h2 {
+      font-size: clamp(24px, 3.5vw, 36px);
+      font-weight: 800;
+    }
+    h3 {
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .lead {
+      font-size: clamp(16px, 2vw, 19px);
+      color: var(--muted);
+      margin-top: 14px;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 36px 0 48px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+    @media (min-width: 960px) {
+      .hero-grid {
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 48px;
+      }
+    }
+    .hero-highlight {
+      background: var(--acid-lime);
+      padding: 0 8px;
+      border-radius: 8px;
+      display: inline-block;
+    }
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .platform-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 24px;
+    }
+    .pill {
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--white);
+      border: 1px solid var(--border);
+    }
+    .hero-card {
+      background: var(--graphite);
+      color: var(--white);
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .hero-card-step {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--acid-lime);
+      color: var(--graphite);
+      font-weight: 800;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* Benefits Strip */
+    .benefits-strip {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 28px;
+    }
+    @media (min-width: 768px) {
+      .benefits-strip { grid-template-columns: repeat(3, 1fr); }
+    }
+    .benefit-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .benefit-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--soft-grey);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-weight: 700;
+    }
+
+    /* Calculator */
+    .calc-wrapper {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    @media (min-width: 960px) {
+      .calc-wrapper {
+        grid-template-columns: 1.15fr 0.85fr;
+        align-items: start;
+      }
+    }
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+    @media (min-width: 768px) {
+      .card { padding: 28px; }
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    @media (min-width: 600px) {
+      .form-grid.two-col { grid-template-columns: 1fr 1fr; }
+    }
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .field label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--graphite);
+    }
+    .field-hint {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .input, .select, .textarea {
+      width: 100%;
+      min-height: 44px;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--white);
+      font-size: 15px;
+      transition: border-color 0.15s;
+    }
+    .input:focus, .select:focus, .textarea:focus {
+      border-color: var(--graphite);
+      outline: none;
+    }
+    .alert {
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      line-height: 1.45;
+      border: 1px solid transparent;
+    }
+    .alert-warning {
+      background: var(--warning-bg);
+      color: var(--warning);
+      border-color: #FEDF89;
+    }
+    .alert-info {
+      background: var(--soft-grey);
+      color: var(--graphite);
+      border-color: var(--border);
+    }
+    .alert-success {
+      background: var(--success-bg);
+      color: var(--success);
+      border-color: #A6F4C5;
+    }
+    .alert-danger {
+      background: var(--danger-bg);
+      color: var(--danger);
+      border-color: #FECDCA;
+    }
+
+    /* Photo upload preview */
+    .upload-zone {
+      border: 1.5px dashed var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      text-align: center;
+      background: var(--milk);
+      cursor: pointer;
+    }
+    .upload-zone:hover {
+      border-color: var(--graphite);
+    }
+    .preview-box {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 10px;
+      padding: 10px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+    }
+    .preview-box.active {
+      display: flex;
+    }
+    .preview-box img {
+      width: 56px;
+      height: 56px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    /* Quote Summary Box */
+    .result-card {
+      background: var(--graphite);
+      color: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      position: sticky;
+      top: 88px;
+    }
+    .result-total-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #A0A09A;
+    }
+    .result-total-value {
+      font-family: var(--font-heading);
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 800;
+      color: var(--acid-lime);
+      margin: 4px 0 12px;
+    }
+    .breakdown-list {
+      list-style: none;
+      border-top: 1px solid #333;
+      border-bottom: 1px solid #333;
+      padding: 14px 0;
+      margin: 14px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 14px;
+    }
+    .breakdown-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .breakdown-row span:first-child {
+      color: #CCC;
+    }
+    .breakdown-row span:last-child {
+      font-weight: 600;
+      text-align: right;
+    }
+    .disclaimer-text {
+      font-size: 12px;
+      color: #B0B0A8;
+      line-height: 1.45;
+      margin-bottom: 16px;
+    }
+
+    /* Grids for Categories, Steps, etc. */
+    .grid-4 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    @media (min-width: 600px) {
+      .grid-4 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 960px) {
+      .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    }
+    .cat-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+    }
+    .cat-weight-tag {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: 12px;
+      font-weight: 600;
+      background: var(--soft-grey);
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
+
+    /* FAQ Accordion */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 820px;
+    }
+    .faq-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .faq-trigger {
+      width: 100%;
+      padding: 18px 20px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .faq-content {
+      display: none;
+      padding: 0 20px 18px;
+      color: var(--muted);
+      font-size: 15px;
+      border-top: 1px solid var(--soft-grey);
+      padding-top: 12px;
+    }
+    .faq-item.open .faq-content {
+      display: block;
+    }
+    .faq-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--soft-grey);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+      background: var(--acid-lime);
+    }
+
+    /* Status Badges */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      background: var(--soft-grey);
+      color: var(--graphite);
+    }
+    .status-badge.lime { background: var(--acid-lime); color: var(--graphite); }
+    .status-badge.warn { background: var(--warning-bg); color: var(--warning); }
+    .status-badge.ok { background: var(--success-bg); color: var(--success); }
+
+    /* Views Management */
+    .view-panel { display: none; }
+    .view-panel.active { display: block; }
+
+    /* Timeline */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 16px;
+      padding-left: 12px;
+      border-left: 2px solid var(--border);
+    }
+    .timeline-event {
+      position: relative;
+      padding-left: 14px;
+    }
+    .timeline-event::before {
+      content: '';
+      position: absolute;
+      left: -19px;
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--border);
+    }
+    .timeline-event.current::before {
+      background: var(--graphite);
+      box-shadow: 0 0 0 4px var(--acid-lime);
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(23, 23, 23, 0.6);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 100;
+    }
+    .modal-backdrop.open {
+      display: flex;
+    }
+    .modal-dialog {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      max-width: 460px;
+      width: 100%;
+      padding: 24px;
+      border: 1px solid var(--border);
+      max-height: 92vh;
+      overflow-y: auto;
+    }
+
+    /* Footer */
+    .site-footer {
+      margin-top: auto;
+      background: var(--graphite);
+      color: var(--white);
+      padding: 48px 0 32px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      margin-bottom: 32px;
+    }
+    @media (min-width: 768px) {
+      .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; }
+    }
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      color: #B0B0A8;
+      font-size: 14px;
+    }
+    .footer-links a:hover { color: var(--acid-lime); }
+  </style>
+</head>
+<body>
+
+  <!-- Панель переключения режимов демонстрации прототипа -->
+  <div class="demo-banner" role="region" aria-label="Режим демонстрации прототипа">
+    <span class="demo-badge">HTML-Прототип (Демо)</span>
+    <span>Автономная версия без сохранения в БД. Переключение экранов:</span>
+    <div class="view-switcher" role="tablist">
+      <button type="button" class="active" data-switch-view="public" role="tab" aria-selected="true">Публичный сайт</button>
+      <button type="button" data-switch-view="account" role="tab" aria-selected="false">Кабинет клиента</button>
+      <button type="button" data-switch-view="admin" role="tab" aria-selected="false">Панель менеджера</button>
+    </div>
+  </div>
+
+  <!-- Шапка -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#" class="brand" data-switch-view="public">
+        <span class="brand-mark" aria-hidden="true">CD</span>
+        <span>ChinaDrop</span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Основная навигация">
+        <a href="#calculator" data-nav-public>Калькулятор</a>
+        <a href="#how-it-works" data-nav-public>Как это работает</a>
+        <a href="#buyouts" data-nav-public>Даты выкупов</a>
+        <a href="#pricing-info" data-nav-public>Условия и формула</a>
+        <a href="#reviews" data-nav-public>Отзывы</a>
+        <a href="#faq" data-nav-public>FAQ</a>
+      </nav>
+
+      <div class="header-actions">
+        <button type="button" class="btn btn-outline btn-sm" id="openAuthBtn">Войти по телефону</button>
+        <button type="button" class="btn btn-dark btn-sm" data-switch-view="account">Личный кабинет</button>
+        <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-expanded="false" aria-controls="mobileNav" aria-label="Открыть меню">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 6h18M3 12h18M3 18h18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <nav class="mobile-nav" id="mobileNav" aria-label="Мобильная навигация">
+      <div class="mobile-nav-links">
+        <a href="#calculator" data-mobile-link>Калькулятор стоимости</a>
+        <a href="#categories" data-mobile-link>Что можно заказать</a>
+        <a href="#how-it-works" data-mobile-link>Как это работает</a>
+        <a href="#buyouts" data-mobile-link>Даты выкупов</a>
+        <a href="#pricing-info" data-mobile-link>Формула расчёта и условия</a>
+        <a href="#reviews" data-mobile-link>Отзывы</a>
+        <a href="#faq" data-mobile-link>Частые вопросы</a>
+        <button type="button" class="btn btn-lime" data-switch-view="account" style="margin-top:8px;">Открыть демо-кабинет</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ==================== ПУБЛИЧНЫЙ САЙТ ==================== -->
+  <main id="view-public" class="view-panel active">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <span class="eyebrow">Индивидуальный выкуп в Беларусь</span>
+            <h1>Нашёл. <span class="hero-highlight">Выкупили.</span> Доставили.</h1>
+            <p class="lead">
+              Пришли ссылку или фото вещи с китайских площадок. Проверим продавца, рассчитаем честную стоимость в BYN до выкупа и покажем каждый этап доставки в личном кабинете и Telegram.
+            </p>
+            <div class="hero-cta-group">
+              <a href="#calculator" class="btn btn-lime">Рассчитать стоимость</a>
+              <a href="#how-it-works" class="btn btn-outline">Как устроен процесс</a>
+            </div>
+            <div class="platform-pills" aria-label="Поддерживаемые площадки">
+              <span class="pill">Poizon (Dewu)</span>
+              <span class="pill">Pinduoduo</span>
+              <span class="pill">Taobao</span>
+              <span class="pill">1688</span>
+              <span class="pill">+ другие площадки по ссылке или фото</span>
+            </div>
+          </div>
+
+          <div class="hero-card">
+            <h2 style="font-size:20px;color:var(--white);">Коротко о правилах заказа</h2>
+            <div class="hero-card-step">
+              <span class="step-num">1</span>
+              <div>
+                <strong>Предварительный расчёт онлайн</strong>
+                <p style="font-size:13px;color:#CCC;">Без регистрации. Менеджер затем вручную проверяет размер, наличие и точный тариф.</p>
+              </div>
+            </div>
+            <div class="hero-card-step">
+              <span class="step-num">2</span>
+              <div>
+                <strong>Предоплата 50–60% после согласования</strong>
+                <p style="font-size:13px;color:#CCC;">Выкуп начинается только когда ты увидел и подтвердил финальную раскладку цены.</p>
+              </div>
+            </div>
+            <div class="hero-card-step">
+              <span class="step-num">3</span>
+              <div>
+                <strong>Китай → Москва → Минск → Европочта</strong>
+                <p style="font-size:13px;color:#CCC;">Остаток согласованной суммы — при получении. Услуги Европочты оплачиваются отдельно.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="benefits-strip">
+          <div class="benefit-item">
+            <div class="benefit-icon">BYN</div>
+            <div>
+              <strong style="font-size:15px;">Расчёт до заказа</strong>
+              <p style="font-size:13px;color:var(--muted);">Никаких скрытых пересчётов уже согласованного quote без твоего согласия.</p>
+            </div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon">24/7</div>
+            <div>
+              <strong style="font-size:15px;">Отслеживание в кабинете</strong>
+              <p style="font-size:13px;color:var(--muted);">Статусы от выкупа в Китае до прибытия партии в Минск и передачи в Европочту.</p>
+            </div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon">TG</div>
+            <div>
+              <strong style="font-size:15px;">Уведомления в Telegram</strong>
+              <p style="font-size:13px;color:var(--muted);">Мгновенные оповещения по одноразовой привязке бота в личном кабинете.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Калькулятор -->
+    <section id="calculator">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Калькулятор без регистрации</span>
+          <h2>Предварительная оценка стоимости</h2>
+          <p class="lead">Укажи цену в юанях (CNY) и категорию вещи, чтобы сразу увидеть расчёт по текущей формуле сервиса.</p>
+        </div>
+
+        <div class="calc-wrapper">
+          <form class="card" id="calcForm" novalidate>
+            <div class="form-grid">
+              <div class="field">
+                <label for="itemUrl">Ссылка на товар (Poizon, Pinduoduo, Taobao, 1688 или др.)</label>
+                <input type="url" id="itemUrl" class="input" placeholder="https://dw4.co/... или ссылка на другую площадку">
+                <span class="field-hint">Необязательно, если загружаешь фотографию товара.</span>
+              </div>
+
+              <div id="urlStatusNotice" class="alert alert-warning" style="display:none;" role="status"></div>
+
+              <div class="form-grid two-col">
+                <div class="field">
+                  <label for="itemCategory">Категория товара</label>
+                  <select id="itemCategory" class="select">
+                    <option value="tshirt" data-weight="0.30">Футболка / лёгкий верх (~0,30 кг)</option>
+                    <option value="hoodie" data-weight="0.70" selected>Худи / свитшот (~0,70 кг)</option>
+                    <option value="jeans" data-weight="0.65">Джинсы / брюки (~0,65 кг)</option>
+                    <option value="shoes" data-weight="1.00">Обувь, пара (~1,00 кг)</option>
+                    <option value="accessory" data-weight="0.30">Небольшой аксессуар (~0,30 кг)</option>
+                    <option value="other" data-weight="0.50">Другая категория (~0,50 кг)</option>
+                  </select>
+                </div>
+
+                <div class="field">
+                  <label for="priceCny">Цена за 1 шт. в юанях (CNY) *</label>
+                  <input type="number" id="priceCny" class="input" value="200" min="1" max="100000" step="1" required>
+                </div>
+              </div>
+
+              <div class="form-grid two-col">
+                <div class="field">
+                  <label for="quantity">Количество (шт.) *</label>
+                  <input type="number" id="quantity" class="input" value="1" min="1" max="20" step="1" required>
+                </div>
+
+                <div class="field">
+                  <label for="unitWeightKg">Ориентировочный вес 1 шт. (кг) *</label>
+                  <input type="number" id="unitWeightKg" class="input" value="0.70" min="0.05" max="30" step="0.05" required>
+                  <span class="field-hint">Подставляется по категории, можно скорректировать.</span>
+                </div>
+              </div>
+
+              <div class="form-grid two-col">
+                <div class="field">
+                  <label for="sizeColor">Размер и цвет (по желанию)</label>
+                  <input type="text" id="sizeColor" class="input" placeholder="Например: L, графитовый">
+                </div>
+
+                <div class="field">
+                  <label for="batchMode">Доля доставки Москва → Минск</label>
+                  <select id="batchMode" class="select">
+                    <option value="tbd" selected>Уточняется менеджером по партии</option>
+                    <option value="forecast">Прогноз партии (25 USD на ~10 кг)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Фото превью -->
+              <div class="field">
+                <label for="photoInput">Фотография или скриншот товара</label>
+                <div class="upload-zone" id="uploadTrigger" tabindex="0" role="button" aria-label="Выбрать фотографию товара">
+                  <input type="file" id="photoInput" accept="image/png,image/jpeg,image/webp" style="display:none;">
+                  <div style="font-weight:600;font-size:14px;">Нажми, чтобы прикрепить скриншот или фото</div>
+                  <div class="field-hint">JPG, PNG, WEBP до 10 МБ. Локальное превью в браузере.</div>
+                </div>
+                <div class="preview-box" id="photoPreviewBox">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <img id="photoPreviewImg" src="" alt="Превью загруженного товара">
+                    <div>
+                      <div id="photoFileName" style="font-size:13px;font-weight:600;"></div>
+                      <div style="font-size:12px;color:var(--muted);">Локальное превью</div>
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-outline btn-sm" id="removePhotoBtn">Удалить</button>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <!-- Карточка результата -->
+          <aside class="result-card" aria-live="polite">
+            <div class="result-total-label" id="resultHeading">Предварительная оценка (промежуточная)</div>
+            <div class="result-total-value" id="resTotalByn">156,31 BYN</div>
+            <div class="status-badge lime" id="resBatchBadge" style="margin-bottom:8px;">+ доставка Москва → Минск уточняется</div>
+
+            <ul class="breakdown-list">
+              <li class="breakdown-row">
+                <span>Товар (<span id="resCnyLabel">200 CNY × 1</span> по курсу 0,50):</span>
+                <span id="resGoodsByn">100,00 BYN</span>
+              </li>
+              <li class="breakdown-row">
+                <span>Ориентировочный общий вес:</span>
+                <span id="resWeightTotal">0,70 кг</span>
+              </li>
+              <li class="breakdown-row">
+                <span>Карго Китай → Москва ($5/кг, курс 3,03):</span>
+                <span id="resChinaMoscowByn">10,61 BYN</span>
+              </li>
+              <li class="breakdown-row">
+                <span>Комиссия сервиса (20% на товар + карго):</span>
+                <span id="resMarkupByn">22,12 BYN</span>
+              </li>
+              <li class="breakdown-row">
+                <span>Промежуточная сумма до Москвы:</span>
+                <span id="resSubtotalByn">132,73 BYN</span>
+              </li>
+              <li class="breakdown-row">
+                <span>Доля транспорта Москва → Минск:</span>
+                <span id="resMoscowMinskByn">Уточняется менеджером</span>
+              </li>
+              <li class="breakdown-row">
+                <span>Доставка по Китаю до склада карго:</span>
+                <span>Уточняется по продавцу</span>
+              </li>
+              <li class="breakdown-row">
+                <span>Европочта по Беларуси:</span>
+                <span>Оплачивается отдельно</span>
+              </li>
+            </ul>
+
+            <div class="breakdown-row" style="margin-bottom:14px;font-size:13px;color:#DDD;">
+              <span>Ориентир предоплаты (55% после проверки):</span>
+              <strong id="resDepositByn" style="color:var(--acid-lime);">~73,00 BYN</strong>
+            </div>
+
+            <p class="disclaimer-text">
+              Предварительная оценка. Менеджер проверит товар, доступность, вес и расходы на доставку. Окончательная сумма будет показана до выкупа и требует вашего подтверждения.
+            </p>
+
+            <button type="button" class="btn btn-lime" style="width:100%;" id="submitOrderCta">
+              Оформить заявку на проверку
+            </button>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Категории -->
+    <section id="categories" style="background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Индивидуальный заказ</span>
+          <h2>Что можно заказать через ChinaDrop</h2>
+          <p class="lead">Мы не продаём товары с собственного склада — выкупаем конкретную вещь по твоей ссылке или фотографии.</p>
+        </div>
+
+        <div class="grid-4">
+          <article class="cat-card">
+            <div>
+              <span class="cat-weight-tag">Ориентир: 0,30–0,70 кг</span>
+              <h3 style="margin-top:12px;">Одежда</h3>
+              <p style="font-size:14px;color:var(--muted);margin-top:6px;">Футболки, худи, свитшоты, джинсы, карго и куртки с китайских площадок.</p>
+            </div>
+            <button type="button" class="btn btn-outline btn-sm" data-select-cat="hoodie">Выбрать в калькуляторе</button>
+          </article>
+
+          <article class="cat-card">
+            <div>
+              <span class="cat-weight-tag">Ориентир: ~1,00 кг</span>
+              <h3 style="margin-top:12px;">Обувь</h3>
+              <p style="font-size:14px;color:var(--muted);margin-top:6px;">Кроссовки, кеды и сезонная обувь с проверкой доступности нужного размера.</p>
+            </div>
+            <button type="button" class="btn btn-outline btn-sm" data-select-cat="shoes">Выбрать в калькуляторе</button>
+          </article>
+
+          <article class="cat-card">
+            <div>
+              <span class="cat-weight-tag">Ориентир: ~0,30 кг</span>
+              <h3 style="margin-top:12px;">Аксессуары</h3>
+              <p style="font-size:14px;color:var(--muted);margin-top:6px;">Сумки, рюкзаки, головные уборы, ремни и малые аксессуары.</p>
+            </div>
+            <button type="button" class="btn btn-outline btn-sm" data-select-cat="accessory">Выбрать в калькуляторе</button>
+          </article>
+
+          <article class="cat-card">
+            <div>
+              <span class="cat-weight-tag">Индивидуальная проверка</span>
+              <h3 style="margin-top:12px;">Другое (в т.ч. конструкторы)</h3>
+              <p style="font-size:14px;color:var(--muted);margin-top:6px;">Игрушки (например, LEGO) и нестандартные позиции — возможность перевозки подтверждает менеджер.</p>
+            </div>
+            <button type="button" class="btn btn-outline btn-sm" data-select-cat="other">Выбрать в калькуляторе</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Как это работает -->
+    <section id="how-it-works">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Процесс от ссылки до получения</span>
+          <h2>Как работает выкуп</h2>
+        </div>
+
+        <div class="grid-4">
+          <div class="card">
+            <span class="step-num" style="margin-bottom:12px;">1</span>
+            <h3>Заявка и проверка</h3>
+            <p style="font-size:14px;color:var(--muted);margin-top:8px;">Ты отправляешь ссылку или фото и проходишь вход по номеру телефона. Менеджер находит товар на Pinduoduo, Poizon, Taobao или 1688 и проверяет наличие.</p>
+          </div>
+          <div class="card">
+            <span class="step-num" style="margin-bottom:12px;">2</span>
+            <h3>Фиксация цены и аванс</h3>
+            <p style="font-size:14px;color:var(--muted);margin-top:8px;">Менеджер отправляет точный расчёт (Quote). Если всё устраивает, ты подтверждаешь цену и вносишь предоплату 50–60%.</p>
+          </div>
+          <div class="card">
+            <span class="step-num" style="margin-bottom:12px;">3</span>
+            <h3>Выкуп и логистика</h3>
+            <p style="font-size:14px;color:var(--muted);margin-top:8px;">Выкупаем товар. Он поступает на склад карго в Китае, затем в составе общей партии едет в Москву, а оттуда транспортной компанией — в Минск.</p>
+          </div>
+          <div class="card">
+            <span class="step-num" style="margin-bottom:12px;">4</span>
+            <h3>Европочта и остаток</h3>
+            <p style="font-size:14px;color:var(--muted);margin-top:8px;">В Минске готовим посылку к отправке Европочтой. Остаток согласованной стоимости оплачивается при получении, пересылка Европочтой — отдельно.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ближайшие выкупы и прозрачность формулы -->
+    <section id="buyouts" style="background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+      <div class="container">
+        <div class="calc-wrapper">
+          <div>
+            <span class="eyebrow">Партии и расписание</span>
+            <h2>Ближайший выкуп</h2>
+            <div class="card" style="margin-top:20px;background:var(--milk);">
+              <div class="status-badge warn" style="margin-bottom:10px;">Реальное расписание задаётся в админ-панели</div>
+              <h3>Даты следующего выкупа скоро появятся</h3>
+              <p style="font-size:14px;color:var(--muted);margin-top:8px;">
+                Пока дата общей отправки не опубликована администратором, ты уже можешь отправить ссылку или фотографию товара на предварительную оценку и проверку наличия у продавца.
+              </p>
+            </div>
+          </div>
+
+          <div id="pricing-info">
+            <span class="eyebrow">Честная математика</span>
+            <h2>Как считается стоимость</h2>
+            <div class="card" style="margin-top:20px;">
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;font-size:14px;">
+                <li><strong>1. Курсы (редактируемые в настройках):</strong> 1 CNY = 0,50 BYN; 1 USD = 3,03 BYN.</li>
+                <li><strong>2. Карго Китай → Москва:</strong> ориентировочно 5 USD за 1 кг веса.</li>
+                <li><strong>3. Комиссия сервиса:</strong> 20% начисляется только на (товар + доставка Китай → Москва).</li>
+                <li><strong>4. Москва → Минск:</strong> до 25 USD на всю партию, распределяется пропорционально весу заказов в партии без повторной наценки 20%.</li>
+                <li><strong>5. Европочта:</strong> оплачивается клиентом отдельно при получении.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Отзывы (честное пустое состояние) -->
+    <section id="reviews">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Обратная связь</span>
+          <h2>Отзывы клиентов</h2>
+        </div>
+        <div class="card" style="text-align:center;padding:40px 20px;">
+          <div class="status-badge" style="margin-bottom:12px;">Без вымышленных карточек</div>
+          <h3>Отзывы появятся здесь после подтверждённых заказов</h3>
+          <p style="font-size:14px;color:var(--muted);max-width:520px;margin:8px auto 0;">
+            Мы публикуем только отзывы реальных клиентов по доставленным заказам после прохождения модерации.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" style="background:var(--white);border-top:1px solid var(--border);">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Ответы на вопросы</span>
+          <h2>Частые вопросы (FAQ)</h2>
+        </div>
+
+        <div class="faq-list">
+          <div class="faq-item open">
+            <button type="button" class="faq-trigger" aria-expanded="true">
+              <span>Почему цена в калькуляторе называется предварительной?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-content">
+              На китайских площадках цена часто зависит от конкретного размера, цвета и внутренней доставки по Китаю до склада карго, а доля доставки Москва → Минск зависит от общего веса собранной партии. Поэтому менеджер всегда проверяет товар вручную и присылает точную сумму на согласование до выкупа.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button type="button" class="faq-trigger" aria-expanded="false">
+              <span>Какая предоплата нужна для выкупа?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-content">
+              После того как менеджер проверил товар и ты согласился с итоговой стоимостью в личном кабинете, вносится предоплата 50–60% (по умолчанию 55%). Остаток согласованной суммы оплачивается при получении заказа.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button type="button" class="faq-trigger" aria-expanded="false">
+              <span>Что делать, если у меня нет ссылки, а есть только фото или скриншот?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-content">
+              Прикрепи фотографию в калькуляторе и отправь заявку. Менеджер сам найдёт эту позицию на Poizon, Pinduoduo, Taobao или 1688 и пришлёт расчёт в твой личный кабинет.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button type="button" class="faq-trigger" aria-expanded="false">
+              <span>Входит ли доставка Европочтой по Беларуси в расчёт калькулятора?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-content">
+              Нет, услуги пересылки Европочтой из Минска в твой город оплачиваются отдельно по тарифам почтового оператора.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== ДЕМО: ЛИЧНЫЙ КАБИНЕТ КЛИЕНТА ==================== -->
+  <main id="view-account" class="view-panel">
+    <section>
+      <div class="container">
+        <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-bottom:24px;">
+          <div>
+            <span class="eyebrow">Демо-режим личного кабинета</span>
+            <h2>Мои заказы и отслеживание</h2>
+            <p style="font-size:14px;color:var(--muted);">Тестовые данные для демонстрации интерфейса клиента (телефон: +375 •• •••-00-00 [ДЕМО]).</p>
+          </div>
+          <div style="display:flex;gap:10px;">
+            <button type="button" class="btn btn-outline btn-sm" id="demoTgBtn">Telegram: не привязан (Демо)</button>
+            <button type="button" class="btn btn-dark btn-sm" data-switch-view="public">На главную</button>
+          </div>
+        </div>
+
+        <div class="calc-wrapper">
+          <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;">
+              <div>
+                <span class="status-badge warn" id="demoOrderStatusBadge">Стоимость на согласовании (QUOTE_SENT)</span>
+                <h3 style="margin-top:8px;">Заказ #CD-1042 (ДЕМО-ЗАПИСЬ)</h3>
+                <p style="font-size:14px;color:var(--muted);">Кроссовки Nike Air Max (Poizon) • Размер 42 • 1 шт. • Подтверждённый вес: 1,00 кг</p>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-size:12px;color:var(--muted);">Версия расчёта Quote v1</div>
+                <div style="font-size:24px;font-weight:800;">145,76 BYN</div>
+              </div>
+            </div>
+
+            <div class="alert alert-info" style="margin-top:16px;" id="demoClientActionBox">
+              <strong>Менеджер подтвердил стоимость (Quote v1):</strong>
+              Товар 200 CNY (100,00 BYN) + Карго Китай→Москва 1 кг (15,15 BYN) + Комиссия 20% (23,03 BYN) + Доля Москва→Минск (7,58 BYN) = <strong>145,76 BYN</strong>.
+              Требуемая предоплата (55%): <strong>80,17 BYN</strong>. Остаток при получении: <strong>65,59 BYN</strong> (+ Европочта отдельно).
+              <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+                <button type="button" class="btn btn-lime btn-sm" id="demoAcceptQuoteBtn">Я согласен, оформить выкуп (Демо)</button>
+              </div>
+            </div>
+
+            <h4 style="margin-top:24px;">История статусов заказа</h4>
+            <div class="timeline" id="demoTimeline">
+              <div class="timeline-event">
+                <div style="font-size:12px;color:var(--muted);">Сегодня, 14:10</div>
+                <strong>Заявка принята (REQUEST_SUBMITTED)</strong>
+              </div>
+              <div class="timeline-event">
+                <div style="font-size:12px;color:var(--muted);">Сегодня, 14:25</div>
+                <strong>Менеджер проверяет товар (MANAGER_REVIEW)</strong>
+                <div style="font-size:13px;color:var(--muted);">Проверено наличие размера 42 у продавца.</div>
+              </div>
+              <div class="timeline-event current" id="demoCurrentTimelineItem">
+                <div style="font-size:12px;color:var(--muted);">Сегодня, 14:40</div>
+                <strong id="demoCurrentTimelineTitle">Стоимость на согласовании (QUOTE_SENT)</strong>
+                <div style="font-size:13px;color:var(--muted);" id="demoCurrentTimelineNote">Ожидаем подтверждения расчёта клиентом перед выкупом.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Уведомления и привязка Telegram</h3>
+            <p style="font-size:13px;color:var(--muted);margin-top:6px;">
+              В рабочей версии с подключённым backend здесь генерируется одноразовая ссылка <code>https://t.me/bot?start=token</code> со сроком действия 15 минут.
+            </p>
+            <div class="alert alert-warning" style="margin-top:14px;">
+              В статическом HTML-файле Telegram-бот и отправка SMS не выполняются — для них требуется запуск серверной части из репозитория.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== ДЕМО: ПАНЕЛЬ МЕНЕДЖЕРА / АДМИНКА ==================== -->
+  <main id="view-admin" class="view-panel">
+    <section>
+      <div class="container">
+        <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-bottom:24px;">
+          <div>
+            <span class="eyebrow">Демонстрация интерфейса MANAGER / ADMIN</span>
+            <h2>Управление заказами и партиями</h2>
+          </div>
+          <button type="button" class="btn btn-outline btn-sm" data-switch-view="account">Посмотреть глазами клиента</button>
+        </div>
+
+        <div class="calc-wrapper">
+          <div class="card">
+            <h3>Карточка заказа #CD-1042 (ДЕМО)</h3>
+            <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Изменение статуса ниже мгновенно обновит демо-экран клиента для проверки потока.</p>
+
+            <div class="form-grid two-col">
+              <div class="field">
+                <label for="adminStatusSelect">Статус заказа</label>
+                <select id="adminStatusSelect" class="select">
+                  <option value="QUOTE_SENT">QUOTE_SENT — Стоимость на согласовании</option>
+                  <option value="AWAITING_PREPAYMENT">AWAITING_PREPAYMENT — Ожидаем предоплату</option>
+                  <option value="PREPAYMENT_RECEIVED">PREPAYMENT_RECEIVED — Предоплата получена</option>
+                  <option value="PURCHASED">PURCHASED — Товар выкуплен</option>
+                  <option value="AT_CHINA_WAREHOUSE">AT_CHINA_WAREHOUSE — На складе в Китае</option>
+                  <option value="IN_TRANSIT_TO_MOSCOW">IN_TRANSIT_TO_MOSCOW — В пути в Москву</option>
+                  <option value="IN_TRANSIT_TO_MINSK">IN_TRANSIT_TO_MINSK — В пути в Минск</option>
+                  <option value="AT_MINSK">AT_MINSK — Прибыл в Минск</option>
+                  <option value="SENT_VIA_EUROPOCHTA">SENT_VIA_EUROPOCHTA — Отправлен Европочтой</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="adminPublicNote">Публичная заметка для клиента</label>
+                <input type="text" id="adminPublicNote" class="input" value="Партия отправлена со склада в Китае.">
+              </div>
+            </div>
+
+            <div class="field" style="margin-top:12px;">
+              <label for="adminPrivateNote">Внутренняя заметка менеджера (скрыта от клиента)</label>
+              <input type="text" id="adminPrivateNote" class="input" value="Проверить плотность упаковки коробки.">
+            </div>
+
+            <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;">
+              <button type="button" class="btn btn-lime btn-sm" id="adminApplyStatusBtn">Применить статус в демо</button>
+            </div>
+            <div id="adminFeedback" class="alert alert-success" style="display:none;margin-top:12px;"></div>
+          </div>
+
+          <div class="card">
+            <h3>Текущие тарифные константы</h3>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;font-size:14px;margin-top:12px;">
+              <li>Курс CNY → BYN: <strong>0,50 BYN</strong></li>
+              <li>Курс USD → BYN: <strong>3,03 BYN</strong></li>
+              <li>Карго Китай → Москва: <strong>5,00 USD / кг</strong></li>
+              <li>Наценка сервиса: <strong>20% (на товар + карго до Москвы)</strong></li>
+              <li>Предоплата: <strong>50–60% (по умолчанию 55%)</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Модальное окно входа / оформления заявки -->
+  <div class="modal-backdrop" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authModalTitle">
+    <div class="modal-dialog">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <h3 id="authModalTitle">Вход по номеру телефона</h3>
+        <button type="button" class="btn btn-outline btn-sm" id="closeModalBtn">Закрыть</button>
+      </div>
+
+      <div class="alert alert-warning" style="margin-bottom:14px;">
+        <strong>ДЕМО-РЕЖИМ (статический HTML):</strong> реальные SMS-коды не отправляются, а персональные данные никуда не сохраняются. Введённый расчёт сохранён в памяти текущей страницы.
+      </div>
+
+      <div id="savedCalcPreview" class="alert alert-info" style="margin-bottom:14px;font-size:12px;"></div>
+
+      <form id="demoAuthForm" novalidate>
+        <div class="field" style="margin-bottom:12px;">
+          <label for="phoneInput">Номер телефона (Беларусь)</label>
+          <input type="tel" id="phoneInput" class="input" placeholder="+375 (29) 000-00-00" required>
+        </div>
+
+        <div class="field" style="margin-bottom:14px;">
+          <label style="display:flex;align-items:flex-start;gap:8px;font-weight:400;font-size:13px;">
+            <input type="checkbox" id="consentCheckbox" style="margin-top:3px;">
+            <span>Согласен с условиями сервиса и политикой обработки персональных данных (обязательно для отправки заявки).</span>
+          </label>
+        </div>
+
+        <div id="authErrorBox" class="alert alert-danger" style="display:none;margin-bottom:12px;"></div>
+
+        <button type="submit" class="btn btn-lime" style="width:100%;">Перейти в демо-кабинет</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand" style="color:var(--white);margin-bottom:10px;">
+            <span class="brand-mark" style="background:var(--acid-lime);color:var(--graphite);">CD</span>
+            <span>ChinaDrop</span>
+          </div>
+          <p style="font-size:14px;color:#B0B0A8;max-width:360px;">
+            Нашёл. Выкупили. Доставили. Сервис индивидуального выкупа товаров с китайских торговых площадок в Беларусь.
+          </p>
+        </div>
+
+        <div>
+          <h4 style="margin-bottom:10px;font-size:15px;">Разделы</h4>
+          <ul class="footer-links">
+            <li><a href="#calculator" data-nav-public>Калькулятор стоимости</a></li>
+            <li><a href="#how-it-works" data-nav-public>Как это работает</a></li>
+            <li><a href="#buyouts" data-nav-public>Даты выкупов</a></li>
+            <li><a href="#pricing-info" data-nav-public>Условия сервиса</a></li>
+            <li><a href="#faq" data-nav-public>FAQ</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 style="margin-bottom:10px;font-size:15px;">Контакты и реквизиты</h4>
+          <p style="font-size:13px;color:#B0B0A8;">
+            [Placeholder для настройки владельцем в админ-панели: Telegram-контакт менеджера, УНП / реквизиты ИП или юрлица, ссылки на проверенные юристом Условия и Политику конфиденциальности].
+          </p>
+        </div>
+      </div>
+
+      <div style="border-top:1px solid #333;padding-top:20px;font-size:12px;color:#888;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+        <span>© ChinaDrop. Все расчёты на сайте носят предварительный характер до подтверждения менеджером.</span>
+        <span>Локаль: ru-BY • Валюта расчёта: BYN</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const CONFIG = {
+        cnyToByn: 0.50,
+        usdToByn: 3.03,
+        chinaMoscowUsdPerKg: 5.00,
+        markupRate: 0.20,
+        defaultDepositRate: 0.55,
+        forecastBatchCostUsd: 25.00,
+        forecastBatchWeightKg: 10.00
+      };
+
+      const ALLOWED_HOSTS = ['poizon.com', 'dewu.com', 'dw4.co', 'pinduoduo.com', 'yangkeduo.com', 'taobao.com', 'tmall.com', '1688.com'];
+
+      const fmtByn = (val) => val.toFixed(2).replace('.', ',') + ' BYN';
+      const fmtKg = (val) => val.toFixed(2).replace('.', ',') + ' кг';
+
+      const itemUrl = document.getElementById('itemUrl');
+      const urlStatusNotice = document.getElementById('urlStatusNotice');
+      const itemCategory = document.getElementById('itemCategory');
+      const priceCny = document.getElementById('priceCny');
+      const quantity = document.getElementById('quantity');
+      const unitWeightKg = document.getElementById('unitWeightKg');
+      const batchMode = document.getElementById('batchMode');
+
+      const resTotalByn = document.getElementById('resTotalByn');
+      const resultHeading = document.getElementById('resultHeading');
+      const resBatchBadge = document.getElementById('resBatchBadge');
+      const resCnyLabel = document.getElementById('resCnyLabel');
+      const resGoodsByn = document.getElementById('resGoodsByn');
+      const resWeightTotal = document.getElementById('resWeightTotal');
+      const resChinaMoscowByn = document.getElementById('resChinaMoscowByn');
+      const resMarkupByn = document.getElementById('resMarkupByn');
+      const resSubtotalByn = document.getElementById('resSubtotalByn');
+      const resMoscowMinskByn = document.getElementById('resMoscowMinskByn');
+      const resDepositByn = document.getElementById('resDepositByn');
+
+      let currentCalcState = {};
+
+      function validateAndInspectUrl(rawUrl) {
+        const trimmed = rawUrl.trim();
+        if (!trimmed) {
+          urlStatusNotice.style.display = 'none';
+          return;
+        }
+        try {
+          const parsed = new URL(trimmed);
+          if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
+            throw new Error('Недопустимый протокол');
+          }
+          const hostMatch = ALLOWED_HOSTS.some(h => parsed.hostname === h || parsed.hostname.endsWith('.' + h));
+          urlStatusNotice.style.display = 'block';
+          if (hostMatch) {
+            urlStatusNotice.className = 'alert alert-info';
+            urlStatusNotice.textContent = 'Распознана ссылка (' + parsed.hostname + '). В автономном HTML автоматическое извлечение цены отключено: укажи цену в юанях вручную или отправь заявку менеджеру.';
+          } else {
+            urlStatusNotice.className = 'alert alert-warning';
+            urlStatusNotice.textContent = 'Не удалось автоматически получить цену по ссылке. Введи цену в юанях или отправь заявку менеджеру — мы уточним стоимость.';
+          }
+        } catch (e) {
+          urlStatusNotice.style.display = 'block';
+          urlStatusNotice.className = 'alert alert-danger';
+          urlStatusNotice.textContent = 'Проверь корректность ссылки (должна начинаться с https://).';
+        }
+      }
+
+      function recalculate() {
+        const cny = Math.max(1, parseFloat(priceCny.value) || 0);
+        const qty = Math.max(1, parseInt(quantity.value, 10) || 1);
+        const uWeight = Math.max(0.05, parseFloat(unitWeightKg.value) || 0.5);
+        const effectiveWeightKg = +(uWeight * qty).toFixed(3);
+
+        const goodsByn = +(cny * qty * CONFIG.cnyToByn).toFixed(2);
+        const chinaMoscowFreightByn = +(effectiveWeightKg * CONFIG.chinaMoscowUsdPerKg * CONFIG.usdToByn).toFixed(2);
+        const markupBaseByn = +(goodsByn + chinaMoscowFreightByn).toFixed(2);
+        const markupByn = +(markupBaseByn * CONFIG.markupRate).toFixed(2);
+        const subtotalBeforeMoscowMinsk = +(markupBaseByn + markupByn).toFixed(2);
+
+        let moscowMinskShareByn = null;
+        let displayTotal = subtotalBeforeMoscowMinsk;
+
+        if (batchMode.value === 'forecast') {
+          const shareUsd = (CONFIG.forecastBatchCostUsd * effectiveWeightKg) / CONFIG.forecastBatchWeightKg;
+          moscowMinskShareByn = +(shareUsd * CONFIG.usdToByn).toFixed(2);
+          displayTotal = +(subtotalBeforeMoscowMinsk + moscowMinskShareByn).toFixed(2);
+          resultHeading.textContent = 'Предварительная оценка (с прогнозом партии)';
+          resBatchBadge.textContent = 'Включает ориентир Москва → Минск';
+          resMoscowMinskByn.textContent = fmtByn(moscowMinskShareByn) + ' (ориентир)';
+        } else {
+          resultHeading.textContent = 'Промежуточная сумма (до доли Москва → Минск)';
+          resBatchBadge.textContent = '+ доставка Москва → Минск уточняется';
+          resMoscowMinskByn.textContent = 'Уточняется менеджером';
+        }
+
+        const depositByn = +(displayTotal * CONFIG.defaultDepositRate).toFixed(2);
+
+        resCnyLabel.textContent = cny + ' CNY × ' + qty;
+        resGoodsByn.textContent = fmtByn(goodsByn);
+        resWeightTotal.textContent = fmtKg(effectiveWeightKg);
+        resChinaMoscowByn.textContent = fmtByn(chinaMoscowFreightByn);
+        resMarkupByn.textContent = fmtByn(markupByn);
+        resSubtotalByn.textContent = fmtByn(subtotalBeforeMoscowMinsk);
+        resTotalByn.textContent = fmtByn(displayTotal);
+        resDepositByn.textContent = '~' + fmtByn(depositByn);
+
+        currentCalcState = {
+          cny,
+          qty,
+          effectiveWeightKg,
+          displayTotal: fmtByn(displayTotal),
+          categoryText: itemCategory.options[itemCategory.selectedIndex].text
+        };
+      }
+
+      itemCategory.addEventListener('change', function () {
+        const selectedOpt = itemCategory.options[itemCategory.selectedIndex];
+        const w = selectedOpt.getAttribute('data-weight');
+        if (w) unitWeightKg.value = w;
+        recalculate();
+      });
+
+      [priceCny, quantity, unitWeightKg, batchMode].forEach(el => {
+        el.addEventListener('input', recalculate);
+        el.addEventListener('change', recalculate);
+      });
+
+      itemUrl.addEventListener('input', function () {
+        validateAndInspectUrl(itemUrl.value);
+      });
+
+      document.querySelectorAll('[data-select-cat]').forEach(btn => {
+        btn.addEventListener('click', function () {
+          const catVal = btn.getAttribute('data-select-cat');
+          itemCategory.value = catVal;
+          itemCategory.dispatchEvent(new Event('change'));
+          document.getElementById('calculator').scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+
+      const uploadTrigger = document.getElementById('uploadTrigger');
+      const photoInput = document.getElementById('photoInput');
+      const photoPreviewBox = document.getElementById('photoPreviewBox');
+      const photoPreviewImg = document.getElementById('photoPreviewImg');
+      const photoFileName = document.getElementById('photoFileName');
+      const removePhotoBtn = document.getElementById('removePhotoBtn');
+
+      uploadTrigger.addEventListener('click', () => photoInput.click());
+      uploadTrigger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          photoInput.click();
+        }
+      });
+
+      photoInput.addEventListener('change', function () {
+        const file = photoInput.files && photoInput.files[0];
+        if (!file) return;
+        if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
+          alert('Пожалуйста, выбери изображение в формате JPG, PNG или WEBP.');
+          photoInput.value = '';
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = function (ev) {
+          photoPreviewImg.src = ev.target.result;
+          photoFileName.textContent = file.name;
+          photoPreviewBox.classList.add('active');
+        };
+        reader.readAsDataURL(file);
+      });
+
+      removePhotoBtn.addEventListener('click', function () {
+        photoInput.value = '';
+        photoPreviewImg.src = '';
+        photoPreviewBox.classList.remove('active');
+      });
+
+      document.querySelectorAll('.faq-trigger').forEach(btn => {
+        btn.addEventListener('click', function () {
+          const item = btn.closest('.faq-item');
+          const isOpen = item.classList.toggle('open');
+          btn.setAttribute('aria-expanded', String(isOpen));
+        });
+      });
+
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const mobileNav = document.getElementById('mobileNav');
+      mobileMenuBtn.addEventListener('click', function () {
+        const open = mobileNav.classList.toggle('open');
+        mobileMenuBtn.setAttribute('aria-expanded', String(open));
+      });
+      document.querySelectorAll('[data-mobile-link]').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileNav.classList.remove('open');
+          mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      function switchView(viewName) {
+        document.querySelectorAll('.view-panel').forEach(p => p.classList.remove('active'));
+        const target = document.getElementById('view-' + viewName);
+        if (target) target.classList.add('active');
+
+        document.querySelectorAll('[data-switch-view]').forEach(btn => {
+          if (btn.getAttribute('role') === 'tab') {
+            const active = btn.getAttribute('data-switch-view') === viewName;
+            btn.classList.toggle('active', active);
+            btn.setAttribute('aria-selected', String(active));
+          }
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      document.querySelectorAll('[data-switch-view]').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          switchView(btn.getAttribute('data-switch-view'));
+        });
+      });
+
+      document.querySelectorAll('[data-nav-public]').forEach(link => {
+        link.addEventListener('click', function () {
+          switchView('public');
+        });
+      });
+
+      const authModal = document.getElementById('authModal');
+      const openAuthBtn = document.getElementById('openAuthBtn');
+      const submitOrderCta = document.getElementById('submitOrderCta');
+      const closeModalBtn = document.getElementById('closeModalBtn');
+      const savedCalcPreview = document.getElementById('savedCalcPreview');
+      const demoAuthForm = document.getElementById('demoAuthForm');
+      const authErrorBox = document.getElementById('authErrorBox');
+
+      function openModal() {
+        savedCalcPreview.textContent = 'Сохранён твой расчёт: ' + currentCalcState.categoryText + ', ' + currentCalcState.cny + ' CNY × ' + currentCalcState.qty + ' шт. (' + currentCalcState.displayTotal + ').';
+        authErrorBox.style.display = 'none';
+        authModal.classList.add('open');
+      }
+      function closeModal() {
+        authModal.classList.remove('open');
+      }
+
+      openAuthBtn.addEventListener('click', openModal);
+      submitOrderCta.addEventListener('click', openModal);
+      closeModalBtn.addEventListener('click', closeModal);
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && authModal.classList.contains('open')) closeModal();
+      });
+
+      demoAuthForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const phone = document.getElementById('phoneInput').value.trim();
+        const consent = document.getElementById('consentCheckbox').checked;
+        if (phone.length < 7) {
+          authErrorBox.style.display = 'block';
+          authErrorBox.textContent = 'Укажи корректный номер телефона для продолжения.';
+          return;
+        }
+        if (!consent) {
+          authErrorBox.style.display = 'block';
+          authErrorBox.textContent = 'Необходимо отметить согласие с условиями сервиса.';
+          return;
+        }
+        closeModal();
+        switchView('account');
+      });
+
+      const demoAcceptQuoteBtn = document.getElementById('demoAcceptQuoteBtn');
+      const demoOrderStatusBadge = document.getElementById('demoOrderStatusBadge');
+      const demoCurrentTimelineTitle = document.getElementById('demoCurrentTimelineTitle');
+      const demoCurrentTimelineNote = document.getElementById('demoCurrentTimelineNote');
+      const adminStatusSelect = document.getElementById('adminStatusSelect');
+      const adminPublicNote = document.getElementById('adminPublicNote');
+      const adminApplyStatusBtn = document.getElementById('adminApplyStatusBtn');
+      const adminFeedback = document.getElementById('adminFeedback');
+
+      demoAcceptQuoteBtn.addEventListener('click', function () {
+        demoOrderStatusBadge.textContent = 'Ожидаем предоплату (AWAITING_PREPAYMENT)';
+        demoOrderStatusBadge.className = 'status-badge lime';
+        demoCurrentTimelineTitle.textContent = 'Стоимость подтверждена клиентом (QUOTE_ACCEPTED → AWAITING_PREPAYMENT)';
+        demoCurrentTimelineNote.textContent = 'Клиент согласился с расчётом Quote v1. Ожидается подтверждение предоплаты менеджером.';
+        demoAcceptQuoteBtn.textContent = 'Согласие зафиксировано';
+        demoAcceptQuoteBtn.disabled = true;
+      });
+
+      adminApplyStatusBtn.addEventListener('click', function () {
+        const selectedText = adminStatusSelect.options[adminStatusSelect.selectedIndex].text;
+        const pubNote = adminPublicNote.value.trim() || 'Статус обновлён менеджером.';
+        demoOrderStatusBadge.textContent = selectedText;
+        demoOrderStatusBadge.className = 'status-badge ok';
+        demoCurrentTimelineTitle.textContent = selectedText;
+        demoCurrentTimelineNote.textContent = pubNote;
+
+        adminFeedback.style.display = 'block';
+        adminFeedback.textContent = 'Статус обновлён в демо! Переключись на «Кабинет клиента», чтобы увидеть изменения.';
+      });
+
+      document.getElementById('demoTgBtn').addEventListener('click', function () {
+        alert('ДЕМО: В full-stack приложении нажатие генерирует одноразовый токен в таблице TelegramLinkToken и открывает https://t.me/<bot>?start=<token>.');
+      });
+
+      recalculate();
+    })();
+  </script>
+</body>
+</html>
